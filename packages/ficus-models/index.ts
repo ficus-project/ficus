@@ -1,1 +1,1 @@
-export interface IFicus { name: string };
+export interface IFicus { name: string }
