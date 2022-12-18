@@ -1,1 +1,2 @@
-export interface IFicus { name: string }
+import './lib/resources';
+import './lib/plants';

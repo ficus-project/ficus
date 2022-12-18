@@ -10,6 +10,7 @@
   "compilerOptions": {
     "outDir": "build",
     "rootDir": "./",
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "paths": {
@@ -29,7 +30,8 @@
     "types": [
       "@adonisjs/core",
       "@adonisjs/repl",
-      "@japa/preset-adonis/build/adonis-typings"
+      "@japa/preset-adonis/build/adonis-typings",
+      "@adonisjs/lucid"
     ]
   }
 }
