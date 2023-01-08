@@ -22,5 +22,8 @@ import Route from '@ioc:Adonis/Core/Route';
 
 Route.get('/', async () => ({ hello: 'world' }));
 Route.group(() => {
-  Route.get('/virtual-machines', 'VirtualMachinesController.index');
+  Route.group(() => {
+    Route.get ('/', 'VirtualMachinesController.index');
+    Route.get ('/consumption', 'VirtualMachinesController.consumption');
+  }).prefix('/vms');
 }).namespace('App/Controllers/Resources').prefix('/resources');

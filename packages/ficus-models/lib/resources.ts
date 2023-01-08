@@ -5,3 +5,7 @@ export interface IVirtualMachine {
   isRunning?: boolean;
   tags?: { [tagName: string]: string }
 }
+
+export interface IVirtualMachineResourceResponse {
+  [vmId: string]: IVirtualMachine
+}
