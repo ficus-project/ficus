@@ -62,6 +62,10 @@
         "code": 140
       }
     ],
+    "function-paren-newline": [
+      "warn",
+      "multiline-arguments"
+    ],
     "no-underscore-dangle": "off",
     "operator-linebreak": "off"
   }

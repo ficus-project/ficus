@@ -3,6 +3,8 @@ export interface IVirtualMachine {
   name?: string;
   provider?: string;
   isRunning?: boolean;
+  cpuThreads?: number;
+  memoryInMb?: number;
   tags?: { [tagName: string]: string }
 }
 

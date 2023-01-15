@@ -14,5 +14,15 @@
     },
     "project": "./tsconfig.json"
   },
-  "plugins": []
+  "plugins": [],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": [
+      "error", 
+      {
+        "forbidDefaultForRequired": true,        
+        "functions": "defaultArguments"
+      }
+    ]
+  }
 }

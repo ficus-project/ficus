@@ -14,7 +14,7 @@
       "esnext"
     ],
     "outDir": "build",
-    "rootDir": "./",
+    "rootDir": "../",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

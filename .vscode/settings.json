@@ -1,8 +1,19 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "eslint.workingDirectories": [
-    "packages/ficus-api",
-    "packages/ficus-front",
-    "packages/ficus-models"
-  ]
+    {
+      "mode": "auto"
+    }
+  ],
+  "editor.formatOnSave": false,
+  "javascript.format.enable": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

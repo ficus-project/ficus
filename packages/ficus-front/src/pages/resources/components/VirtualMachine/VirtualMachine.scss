@@ -1,0 +1,9 @@
+@import '../../../../style/imports';
+
+#virtual-machine {
+  .running-state {
+    position: absolute;
+    top: $spacing-xs;
+    right: $spacing-xs;
+  }
+}

@@ -1,0 +1,22 @@
+@import '../../style/imports';
+
+#page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: steelblue;
+  padding: $spacing-s;
+  min-height: 240px;
+
+  .title {
+    font-size: $font-size-title;
+    color: white;
+    margin: 0;
+  }
+
+  .subtitle {
+    font-size: $font-size-subtitle;
+    color: white;
+    margin: 0;
+  }
+}
