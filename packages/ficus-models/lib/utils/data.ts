@@ -1,5 +1,5 @@
 export const convertSnakeCaseToCamelCase = (snakeCaseObject: any): any => {
-  if (typeof snakeCaseObject !== 'object') return snakeCaseObject;
+  if (typeof snakeCaseObject !== 'object' || Array.isArray(snakeCaseObject)) return snakeCaseObject;
 
   const entries = Object.entries(snakeCaseObject);
   return entries.reduce((acc, [key, value]) => ({

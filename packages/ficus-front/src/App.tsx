@@ -2,12 +2,17 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import NavigationSidebar from './components/NavigationSidebar/NavigationSidebar';
 import './App.css';
-import Resources from './pages/resources/Resources';
+import Resources from './pages/resources/ResourcesPage';
+import Impact from './pages/impact/Impact';
 
 const router = createBrowserRouter([
   {
     path: '/resources',
     element: <Resources />,
+  },
+  {
+    path: '/impact',
+    element: <Impact />,
   },
 ]);
 

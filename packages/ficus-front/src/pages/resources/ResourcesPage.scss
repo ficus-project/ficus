@@ -1,0 +1,12 @@
+@import '../../style/imports';
+
+#resources {
+  .resource-list {
+    margin-top: $spacing-m;
+  }
+
+  .resource {
+    display: flex;
+    justify-content: center;
+  }
+} 

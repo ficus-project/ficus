@@ -23,7 +23,7 @@ function VirtualMachine({
   return (
     <Card id="virtual-machine">
       <Card.Content>
-        {isRunning !== undefined ? <Label circular color={runningStateColor} empty className="running-state" /> : null}
+        <Label circular color={runningStateColor} empty className="running-state" />
         <Card.Header>{name ?? id}</Card.Header>
         {name && <Card.Meta>{id}</Card.Meta>}
 

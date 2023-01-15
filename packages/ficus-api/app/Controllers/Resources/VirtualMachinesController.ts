@@ -71,6 +71,6 @@ export default class VirtualMachinesController {
       });
     });
 
-    return { timestamps, values: aggregatedConsumptions };
+    return { timestamps, values: convertSnakeCaseToCamelCase(aggregatedConsumptions) };
   }
 }

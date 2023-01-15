@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 
 const BASE_URL: string = process.env.REACT_APP_API_URL ?? '';
 
-export const getVmsResponse = async (): Promise<IVirtualMachineResourceResponse> => {
+export const getExistingVms = async (): Promise<IVirtualMachineResourceResponse> => {
   const getVmsUrl = new URL(`${BASE_URL}/resources/vms`);
   getVmsUrl.searchParams.append('from', DateTime.now().minus({ weeks: 7 }).toISODate());
   getVmsUrl.searchParams.append('to', DateTime.now().toISODate());
@@ -13,4 +13,4 @@ export const getVmsResponse = async (): Promise<IVirtualMachineResourceResponse>
   return vmsResult as IVirtualMachineResourceResponse;
 };
 
-export default getVmsResponse;
+export default getExistingVms;
