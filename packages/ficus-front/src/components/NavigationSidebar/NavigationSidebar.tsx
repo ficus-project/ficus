@@ -7,14 +7,14 @@ import './NavigationSidebar.scss';
 function NavigationSidebar({ children }: { children: ReactNode }) {
   return (
     <SidebarPushable id="navigation-sidebar">
-      <Sidebar visible animation="push" width="thin">
+      <Sidebar visible animation="overlay" width="thin">
         <Menu vertical className="menu">
           <MenuItem disabled>Ficuses</MenuItem>
           <MenuItem href="/resources">Resources</MenuItem>
           <MenuItem disabled>Impact</MenuItem>
         </Menu>
       </Sidebar>
-      <SidebarPusher>
+      <SidebarPusher className="page">
         {children}
       </SidebarPusher>
     </SidebarPushable>

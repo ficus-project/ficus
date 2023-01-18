@@ -1,12 +1,10 @@
 @import '../../style/imports';
 
 #resources {
+  padding: 0 $spacing-s;
+  
   .resource-list {
     margin-top: $spacing-m;
   }
 
-  .resource {
-    display: flex;
-    justify-content: center;
-  }
 } 

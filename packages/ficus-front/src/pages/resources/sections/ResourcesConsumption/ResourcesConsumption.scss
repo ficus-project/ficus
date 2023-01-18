@@ -1,0 +1,17 @@
+@import '../../../../style/imports';
+
+#resource-consumption {
+  .date-pickers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .label, .picker {
+      margin-right: $spacing-s;
+    }
+  }
+
+  .chart {
+    margin-top: $spacing-m;
+  }
+}

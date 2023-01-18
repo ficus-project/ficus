@@ -5,8 +5,8 @@ const BASE_URL: string = process.env.REACT_APP_API_URL ?? '';
 
 export const getVmsConsumption = async (from: DateTime, to: DateTime): Promise<IConsumptionsResponse> => {
   const getConsumptionUrl = new URL(`${BASE_URL}/resources/vms/consumption`);
-  getConsumptionUrl.searchParams.append('from', from.toISODate());
-  getConsumptionUrl.searchParams.append('to', to.toISODate());
+  getConsumptionUrl.searchParams.append('from', from.toISO());
+  getConsumptionUrl.searchParams.append('to', to.toISO());
 
   const vmsConsumptionResult = await fetch(getConsumptionUrl).then((res) => res.json());
 

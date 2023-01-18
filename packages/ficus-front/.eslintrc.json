@@ -23,6 +23,7 @@
         "forbidDefaultForRequired": true,        
         "functions": "defaultArguments"
       }
-    ]
+    ],
+    "react/no-array-index-key": "off"
   }
 }

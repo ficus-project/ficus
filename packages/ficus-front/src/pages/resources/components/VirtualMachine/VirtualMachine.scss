@@ -1,6 +1,8 @@
 @import '../../../../style/imports';
 
 #virtual-machine {
+  min-height: 100px;
+
   .running-state {
     position: absolute;
     top: $spacing-xs;
