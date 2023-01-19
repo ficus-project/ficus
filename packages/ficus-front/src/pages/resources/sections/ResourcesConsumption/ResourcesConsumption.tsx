@@ -7,13 +7,14 @@ import {
   Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import { Header, Segment } from 'semantic-ui-react';
-import { ChartsDatapoint } from '../../../../models/ChartsModels';
+import { ChartsDatapoint } from './ChartsModels';
 import { getVmsConsumption } from '../../../../requests/api/consumption';
+import { ResourcesPageContext } from '../../ResourcesPageContext';
 import './ResourcesConsumption.scss';
 
 const convertConsumptionsToRechartsPoint = (consumptions: IConsumptionsResponse): ChartsDatapoint[] => {
   const datapoints: ChartsDatapoint[] = consumptions.timestamps.map((timestamp) => ({
-    name: DateTime.fromSeconds(parseInt(timestamp, 10)).toLocaleString(DateTime.DATETIME_SHORT) || '',
+    name: DateTime.fromSeconds(parseInt(timestamp, 10)).toLocaleString(DateTime.DATE_SHORT) || '',
   }));
 
   Object.entries(consumptions.values).forEach(([vmId, vmMetrics]) => {
@@ -27,14 +28,14 @@ const convertConsumptionsToRechartsPoint = (consumptions: IConsumptionsResponse)
 
 function ResourcesConsumption() {
   const [consumptionPoints, setConsumptionPoints] = useState<ChartsDatapoint[]>();
-  const [vmsNames, setVmsNames] = useState<string[]>([]);
-  const [from, setFrom] = useState<DateTime>(DateTime.now().minus({ days: 7 }).startOf('day'));
+  const [vmsIds, setVmsIds] = useState<string[]>([]);
+  const [from, setFrom] = useState<DateTime>(DateTime.now().minus({ month: 1 }).startOf('day'));
   const [to, setTo] = useState<DateTime>(DateTime.now().endOf('day'));
 
   useEffect(() => {
     if (from.isValid && to.isValid) {
       getVmsConsumption(from, to).then((vmsConsumptionResponse) => {
-        setVmsNames(Object.keys(vmsConsumptionResponse.values));
+        setVmsIds(Object.keys(vmsConsumptionResponse.values));
         const datapoints = convertConsumptionsToRechartsPoint(vmsConsumptionResponse);
         setConsumptionPoints(datapoints);
       });
@@ -44,32 +45,41 @@ function ResourcesConsumption() {
   }, [from, to]);
 
   return (
-    <Segment basic id="resource-consumption">
-      <Header as="h2">Virtual Machines Consumption</Header>
-      <div className="date-pickers">
-        <span className="label">From:</span>
-        <DatePicker
-          value={from.isValid ? from.toJSDate() : null}
-          onChange={(date: Date) => setFrom(DateTime.fromJSDate(date))}
-          className="picker"
-        />
-        <span className="label">To:</span>
-        <DatePicker
-          value={to.isValid ? to.toJSDate() : null}
-          onChange={(date: Date) => setTo(DateTime.fromJSDate(date))}
-          className="picker"
-        />
-      </div>
-      <ResponsiveContainer width="100%" height={300} className="chart">
-        <LineChart width={500} height={300} data={consumptionPoints}>
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          {vmsNames.map((vmName) => <Line type="monotone" key={vmName} dataKey={vmName} />)}
-        </LineChart>
-      </ResponsiveContainer>
-    </Segment>
+    <ResourcesPageContext.Consumer>
+      { ({ resourcesNames }) => (
+        <Segment basic id="resource-consumption">
+          <Header as="h2">Consumption</Header>
+          <Header as="h3">Virtual Machines</Header>
+          <div className="date-pickers">
+            <span className="label">From:</span>
+            <DatePicker
+              value={from.isValid ? from.toJSDate() : null}
+              onChange={(date: Date) => setFrom(DateTime.fromJSDate(date))}
+              className="picker"
+            />
+            <span className="label">To:</span>
+            <DatePicker
+              value={to.isValid ? to.toJSDate() : null}
+              onChange={(date: Date) => setTo(DateTime.fromJSDate(date))}
+              className="picker"
+            />
+          </div>
+          <ResponsiveContainer width="100%" height={300} className="chart">
+            <LineChart width={500} height={300} data={consumptionPoints}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip
+                formatter={(value, vmId) => [
+                  typeof value === 'number' ? value.toFixed(3) : value,
+                  resourcesNames.vms?.[vmId] ?? vmId]}
+              />
+              <Legend formatter={(vmId) => resourcesNames.vms?.[vmId] ?? vmId} />
+              {vmsIds.map((vmId) => <Line type="monotone" key={vmId} dataKey={vmId} />)}
+            </LineChart>
+          </ResponsiveContainer>
+        </Segment>
+      )}
+    </ResourcesPageContext.Consumer>
   );
 }
 

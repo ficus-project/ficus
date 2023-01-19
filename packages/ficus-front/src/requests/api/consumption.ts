@@ -7,6 +7,7 @@ export const getVmsConsumption = async (from: DateTime, to: DateTime): Promise<I
   const getConsumptionUrl = new URL(`${BASE_URL}/resources/vms/consumption`);
   getConsumptionUrl.searchParams.append('from', from.toISO());
   getConsumptionUrl.searchParams.append('to', to.toISO());
+  getConsumptionUrl.searchParams.append('aggregate', 'median');
 
   const vmsConsumptionResult = await fetch(getConsumptionUrl).then((res) => res.json());
 

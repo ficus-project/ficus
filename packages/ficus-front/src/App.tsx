@@ -1,9 +1,8 @@
-import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import NavigationSidebar from './components/NavigationSidebar/NavigationSidebar';
 import './App.css';
 import Resources from './pages/resources/ResourcesPage';
 import Impact from './pages/impact/Impact';
+import AppHeader from './components/AppHeader/AppHeader';
 
 const router = createBrowserRouter([
   {
@@ -19,9 +18,8 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
-      <NavigationSidebar>
-        <RouterProvider router={router} />
-      </NavigationSidebar>
+      <AppHeader />
+      <RouterProvider router={router} />
     </div>
   );
 }

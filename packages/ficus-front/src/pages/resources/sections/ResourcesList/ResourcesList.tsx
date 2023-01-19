@@ -1,26 +1,33 @@
 import { IVirtualMachineResourceResponse } from 'ficus-models/lib/resources';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Grid, Header, Segment } from 'semantic-ui-react';
 import { getExistingVms } from '../../../../requests/api/resources';
 import FakeVirtualMachine from '../../components/VirtualMachine/FakeVirtualMachine';
 import VirtualMachine from '../../components/VirtualMachine/VirtualMachine';
+import { ResourcesPageContext } from '../../ResourcesPageContext';
 
 import './ResourcesList.scss';
 
 function ResourcesList() {
   const [areVmsLoaded, setAreVmsLoaded] = useState<boolean>(false);
   const [vms, setVms] = useState<IVirtualMachineResourceResponse>({});
+  const { resourcesNames, setResourcesNames } = useContext(ResourcesPageContext);
 
   useEffect(() => {
     getExistingVms().then((vmsResponse) => {
       setVms(vmsResponse);
+      setResourcesNames({
+        ...resourcesNames,
+        vms: Object.entries(vmsResponse).reduce((acc, [id, value]) => ({ ...acc, [id]: value.name ?? id }), {}),
+      });
       setAreVmsLoaded(true);
     });
   }, []);
 
   return (
     <Segment basic className="resource-list">
-      <Header as="h2">Virtual Machines List</Header>
+      <Header as="h2">Inventory</Header>
+      <Header as="h3">Virtual Machines</Header>
       <Grid>
         {areVmsLoaded ? (
           Object.keys(vms).map((vmKey) => (

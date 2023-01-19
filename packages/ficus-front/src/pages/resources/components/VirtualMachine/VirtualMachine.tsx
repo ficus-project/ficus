@@ -25,7 +25,7 @@ function VirtualMachine({
       <Card.Content>
         <Label circular color={runningStateColor} empty className="running-state" />
         <Card.Header>{name ?? id}</Card.Header>
-        {name && <Card.Meta>{id}</Card.Meta>}
+        <Card.Meta className="identifier">{name ? id : ''}</Card.Meta>
 
         <Card.Description>
           <ul>
